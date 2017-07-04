@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
-import android.text.method.CharacterPickerDialog;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -19,11 +18,6 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.matthewregis.barcodescanner.R;
 import com.matthewregis.barcodescanner.ui.base.BaseActivity;
 import com.matthewregis.barcodescanner.util.DialogFactory;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -50,49 +44,9 @@ public class MainActivity extends BaseActivity implements MainMvpView, View.OnCl
     ProgressBar progessBar;
 
     @MVBarcodeScanner.BarCodeFormat
-    int[] mFormats = new int[]{Barcode.ALL_FORMATS};
+    int[] mFormats = new int[]{Barcode.UPC_E, Barcode.UPC_A, Barcode.ISBN, Barcode.EAN_8, Barcode.EAN_13}; // Only use codes that upcitemdb.com support eg. UPC, ISBN or EAN
     final int REQ_CODE = 12;
     Barcode mBarcode;
-
-    final static HashMap<Integer, String> TYPE_MAP;
-    final static String[] barcodeTypeItems;
-
-    static {
-        TYPE_MAP = new HashMap<>();
-
-        TYPE_MAP.put(Barcode.ALL_FORMATS, "All Formats");
-        TYPE_MAP.put(Barcode.AZTEC, "Aztec");
-        TYPE_MAP.put(Barcode.CALENDAR_EVENT, "Calendar Event");
-        TYPE_MAP.put(Barcode.CODABAR, "Codabar");
-        TYPE_MAP.put(Barcode.CODE_39, "Code 39");
-        TYPE_MAP.put(Barcode.CODE_93, "Code 93");
-        TYPE_MAP.put(Barcode.CODE_128, "Code 128");
-        TYPE_MAP.put(Barcode.CONTACT_INFO, "Contact Info");
-        TYPE_MAP.put(Barcode.DATA_MATRIX, "Data Matrix");
-        TYPE_MAP.put(Barcode.DRIVER_LICENSE, "Drivers License");
-        TYPE_MAP.put(Barcode.EAN_8, "EAN 8");
-        TYPE_MAP.put(Barcode.EAN_13, "EAN 13");
-        TYPE_MAP.put(Barcode.EMAIL, "Email");
-        TYPE_MAP.put(Barcode.GEO, "Geo");
-        TYPE_MAP.put(Barcode.ISBN, "ISBN");
-        TYPE_MAP.put(Barcode.ITF, "ITF");
-        TYPE_MAP.put(Barcode.PDF417, "PDF 417");
-        TYPE_MAP.put(Barcode.PHONE, "Phone");
-        TYPE_MAP.put(Barcode.QR_CODE, "QR Code");
-        TYPE_MAP.put(Barcode.PRODUCT, "Product");
-        TYPE_MAP.put(Barcode.SMS, "SMS");
-        TYPE_MAP.put(Barcode.UPC_A, "UPC A");
-        TYPE_MAP.put(Barcode.UPC_E, "UPC E");
-        TYPE_MAP.put(Barcode.TEXT, "Text");
-        TYPE_MAP.put(Barcode.URL, "URL");
-
-        List<String> items = new ArrayList<>(TYPE_MAP.values());
-        Collections.sort(items);
-        String[] tempArray = new String[items.size()];
-        tempArray = items.toArray(tempArray);
-        barcodeTypeItems = tempArray;
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +72,12 @@ public class MainActivity extends BaseActivity implements MainMvpView, View.OnCl
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.CheckToShowHelperText();
+    }
+
+    @Override
     public void onClick(View v) {
         new MVBarcodeScanner.Builder()
                 .setScanningMode(MVBarcodeScanner.ScanningMode.SINGLE_AUTO)
@@ -129,29 +89,18 @@ public class MainActivity extends BaseActivity implements MainMvpView, View.OnCl
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == REQ_CODE) {
             if (resultCode == RESULT_OK && data != null && data.getExtras() != null) {
                 Timber.d(String.format("$s$s", "BARCODE-SCANNER", "onActivityResult inside block called"));
                 if (data.getExtras().containsKey(MVBarcodeScanner.BarcodeObject)) {
                     mBarcode = data.getParcelableExtra(MVBarcodeScanner.BarcodeObject);
+                    if (mBarcode != null) {
+                        Timber.d(String.format("$s$s%s", "BARCODE-SCANNER", "got barcode", mBarcode.rawValue));
+                        mPresenter.GetBarcodeInfo(mBarcode.rawValue);
+                        mBarcode = null;
+                    }
                 }
-                updateBarcodeInfo();
             }
-        }
-    }
-
-    String getBarcodeFormatName(int format) {
-        return TYPE_MAP.get(format);
-    }
-
-    void updateBarcodeInfo() {
-        StringBuilder builder = new StringBuilder();
-
-        if (mBarcode != null) {
-            Timber.d(String.format("$s$s", "BARCODE-SCANNER", "got barcode"));
-            builder.append("Type: " + getBarcodeFormatName(mBarcode.format) + "\nData: " + mBarcode.rawValue + "\n\n");
-            mPresenter.GetBarcodeInfo(mBarcode.rawValue);
         }
     }
 
@@ -190,10 +139,10 @@ public class MainActivity extends BaseActivity implements MainMvpView, View.OnCl
 
     @Override
     public void showBarcodeInput() {
-        DialogFactory.createCustomMaterialDialogInput(this, "Barcode input", "Please input a EAN or UPC barcode", "eg. 6867441000198", "", "Ok", new MaterialDialog.InputCallback() {
+        DialogFactory.createCustomMaterialDialogInput(this, "Barcode input", "Please input a UPC, ISBN or EAN number", "eg. 6867441000198", "", "Ok", new MaterialDialog.InputCallback() {
             @Override
             public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-
+                //could capture and validate on key press
             }
         }, new MaterialDialog.SingleButtonCallback() {
             @Override
@@ -209,6 +158,16 @@ public class MainActivity extends BaseActivity implements MainMvpView, View.OnCl
             @Override
             public void onDismiss(DialogInterface dialog) {
 
+            }
+        }).show();
+    }
+
+    @Override
+    public void showHelperText() {
+        DialogFactory.createOkMaterialDialog(this, getString(R.string.helper_text), new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                mPresenter.OnHelperTextSeen();
             }
         }).show();
     }

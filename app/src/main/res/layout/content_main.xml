@@ -8,19 +8,27 @@
     tools:context="com.matthewregis.barcodescanner.ui.main.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@mipmap/ic_launcher"
-        android:visibility="gone" />
-
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/result"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/image"
-        android:layout_margin="10dp" />
+        android:layout_marginTop="30dp">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/md_transparent"
+            android:visibility="gone" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image"
+            android:layout_margin="10dp"
+            android:textAlignment="center" />
+
+    </RelativeLayout>
 
     <ProgressBar
         android:id="@+id/progess_bar"

@@ -35,7 +35,6 @@ public final class DialogFactory {
                     .positiveText("Ok")
                     .dismissListener(dismissListener)
                     .build();
-
             okDialog.setContent(message);
             Linkify.addLinks(okDialog.getContentView(), Linkify.ALL);
             return okDialog;

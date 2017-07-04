@@ -19,4 +19,6 @@ public interface MainMvpView extends MvpView {
 
     void showError(String error);
 
+    void showHelperText();
+
 }

@@ -2,7 +2,10 @@ package com.matthewregis.barcodescanner.data.local;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.matthewregis.barcodescanner.R;
 import com.matthewregis.barcodescanner.injection.ApplicationContext;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -26,7 +29,15 @@ public class PrefHelper {
         mPref.edit().clear().apply();
     }
 
+    public void setHasSeenHelperText(Boolean value) {
+        SharedPreferences.Editor e = mPref.edit();
+        e.putBoolean(mContext.getString(R.string.pref_seen_helper_text), value);
+        e.commit();
+    }
 
+    public Boolean hasSeenHelperText() {
+        return mPref.getBoolean(mContext.getString(R.string.pref_seen_helper_text), false);
+    }
 
 
 }

@@ -7,7 +7,7 @@ import com.matthewregis.barcodescanner.data.model.BarcodeModel;
 import com.matthewregis.barcodescanner.injection.ApplicationContext;
 import com.matthewregis.barcodescanner.injection.ConfigPersistent;
 import com.matthewregis.barcodescanner.ui.base.BasePresenter;
-import com.matthewregis.barcodescanner.util.StringUtil;
+import com.matthewregis.barcodescanner.util.BarcodeValidationUtil;
 
 import javax.inject.Inject;
 
@@ -43,10 +43,10 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     }
 
     public void GetBarcodeInfo(String barcode) {
-        if (!StringUtil.IsValidBarCode(barcode)) {
+        if (!BarcodeValidationUtil.IsValidBarCode(barcode)) {
             getMvpView().hideImage();
             getMvpView().setResultText("");
-            getMvpView().showError("Sorry that barcode doesn't look valid EAN or UPC barcode.");
+            getMvpView().showError("Sorry that barcode doesn't look valid UPC, ISBN or EAN barcode.");
             return;
         }
         getMvpView().hideImage();
@@ -103,5 +103,15 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
 
     public void OnInputOfBarcode(String barcode) {
         GetBarcodeInfo(barcode);
+    }
+
+    public void CheckToShowHelperText() {
+        if (!mDataManager.getPrefHelper().hasSeenHelperText()) {
+            getMvpView().showHelperText();
+        }
+    }
+
+    public void OnHelperTextSeen() {
+        mDataManager.getPrefHelper().setHasSeenHelperText(true);
     }
 }

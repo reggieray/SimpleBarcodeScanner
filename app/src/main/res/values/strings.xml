@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Barcode Scanner</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="pref_seen_helper_text">pref_seen_helper_text</string>
+    <string name="helper_text">Lookup product info by either scanning or inputting a barcode via buttons to the bottom right.</string>
 </resources>

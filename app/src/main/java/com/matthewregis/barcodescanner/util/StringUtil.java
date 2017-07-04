@@ -1,7 +1,5 @@
 package com.matthewregis.barcodescanner.util;
 
-import timber.log.Timber;
-
 /**
  * Created by matthew on 04/07/2017.
  */
@@ -21,13 +19,6 @@ public final class StringUtil {
         return true;
     }
 
-    public static boolean IsValidBarCode(String str) {
-        if (str == null) return false;
-        if (!containsOnlyNumbers(str)) return false;
-        Timber.d(String.format("String len %s %s ", str.length(), str));
-        if (str.length() < 12) return false;
-        if (str.length() > 13) return false;
-        return true;
-    }
+
 
 }
