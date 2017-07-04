@@ -1,6 +1,7 @@
 package com.matthewregis.barcodescanner.data.model;
 
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
@@ -19,5 +20,20 @@ public abstract class BarcodeModel implements Parcelable {
 
     public static TypeAdapter<BarcodeModel> typeAdapter(Gson gson) {
         return new AutoValue_BarcodeModel.GsonTypeAdapter(gson);
+    }
+
+    public static Builder builder() {
+        return new AutoValue_BarcodeModel.Builder();
+    }
+
+    @AutoValue.Builder
+    public abstract static class Builder {
+        public abstract Builder code(String code);
+
+        public abstract Builder total(int total);
+
+        public abstract Builder items(List<ItemModel> items);
+
+        public abstract BarcodeModel build();
     }
 }

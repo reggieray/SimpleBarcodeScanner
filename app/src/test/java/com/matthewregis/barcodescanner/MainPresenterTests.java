@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.matthewregis.barcodescanner.data.DataManager;
 import com.matthewregis.barcodescanner.data.local.PrefHelper;
+import com.matthewregis.barcodescanner.data.model.BarcodeModel;
+import com.matthewregis.barcodescanner.data.model.ItemModel;
 import com.matthewregis.barcodescanner.ui.main.MainMvpView;
 import com.matthewregis.barcodescanner.ui.main.MainPresenter;
 
@@ -13,6 +15,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -58,10 +63,12 @@ public class MainPresenterTests {
 
     @Test
     public void ShouldShowErrorOnInvalidInput() throws Exception {
+        String error = "Sorry that barcode doesn't look valid UPC, ISBN or EAN barcode.";
+        when(mContext.getString(R.string.error_barcode_invalid)).thenReturn(error);
         mPresenter.OnInputOfBarcode("2324234");
         verify(mMainMvpView, times(1)).hideImage();
         verify(mMainMvpView, times(1)).setResultText("");
-        verify(mMainMvpView, times(1)).showError("Sorry that barcode doesn't look valid UPC, ISBN or EAN barcode.");
+        verify(mMainMvpView, times(1)).showError(error);
     }
 
     @Test
@@ -91,5 +98,52 @@ public class MainPresenterTests {
         mPresenter.OnHelperTextSeen();
         verify(mPrefHelper, times(1)).setHasSeenHelperText(true);
     }
+
+    @Test
+    public void ShouldShowEmptyErrorMessageOnEmptyModel() throws Exception {
+        String error = "Sorry that barcode doesn't look valid UPC, ISBN or EAN barcode.";
+        when(mContext.getString(R.string.error_empty_product_info)).thenReturn(error);
+        List<ItemModel> itemModelList = new ArrayList<>();
+        BarcodeModel barcodeModel = BarcodeModel.builder().code("").total(100).items(itemModelList).build();
+        mPresenter.OnBarcodeResult(barcodeModel);
+        verify(mMainMvpView, times(1)).setResultText(error);
+    }
+
+    @Test
+    public void ShouldShowProductInfo() throws Exception {
+        List<String> images = new ArrayList<>();
+        images.add("ImageUrl");
+        ItemModel itemModel = ItemModel.builder().title("title").brand("Google").asin("12345678").images(images).build();
+        List<ItemModel> itemModelList = new ArrayList<>();
+        itemModelList.add(itemModel);
+        BarcodeModel barcodeModel = BarcodeModel.builder().code("").total(100).items(itemModelList).build();
+        String info = String.format("Title: %s\nBrand: %s\nAsin: %s", barcodeModel.items().get(0).title(), barcodeModel.items().get(0).brand(), barcodeModel.items().get(0).asin());
+
+        mPresenter.OnBarcodeResult(barcodeModel);
+        verify(mMainMvpView, times(1)).setResultText(info);
+        verify(mMainMvpView, times(1)).setProductImage("ImageUrl");
+        verify(mMainMvpView, times(1)).showImage();
+    }
+
+    @Test
+    public void ShouldShowProductInfoNoImage() throws Exception {
+        List<String> images = new ArrayList<>();
+        ItemModel itemModel = ItemModel.builder().title("title").brand("Google").asin("12345678").images(images).build();
+        List<ItemModel> itemModelList = new ArrayList<>();
+        itemModelList.add(itemModel);
+        BarcodeModel barcodeModel = BarcodeModel.builder().code("").total(100).items(itemModelList).build();
+        String info = String.format("Title: %s\nBrand: %s\nAsin: %s", barcodeModel.items().get(0).title(), barcodeModel.items().get(0).brand(), barcodeModel.items().get(0).asin());
+
+        mPresenter.OnBarcodeResult(barcodeModel);
+        verify(mMainMvpView, times(1)).setResultText(info);
+        verify(mMainMvpView, never()).setProductImage("ImageUrl");
+        verify(mMainMvpView, never()).showImage();
+    }
+
+
+
+
+
+
 
 }

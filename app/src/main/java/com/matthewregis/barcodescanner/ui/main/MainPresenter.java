@@ -2,6 +2,7 @@ package com.matthewregis.barcodescanner.ui.main;
 
 import android.content.Context;
 
+import com.matthewregis.barcodescanner.R;
 import com.matthewregis.barcodescanner.data.DataManager;
 import com.matthewregis.barcodescanner.data.model.BarcodeModel;
 import com.matthewregis.barcodescanner.injection.ApplicationContext;
@@ -46,7 +47,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
         if (!BarcodeValidationUtil.IsValidBarCode(barcode)) {
             getMvpView().hideImage();
             getMvpView().setResultText("");
-            getMvpView().showError("Sorry that barcode doesn't look valid UPC, ISBN or EAN barcode.");
+            getMvpView().showError(mContext.getString(R.string.error_barcode_invalid));
             return;
         }
         getMvpView().hideImage();
@@ -63,7 +64,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        getMvpView().setResultText("Error on fetching info");
+                        getMvpView().setResultText(mContext.getString(R.string.error_api_failed));
                         Timber.e(e, this.toString());
                         getMvpView().showView();
                     }
@@ -77,18 +78,16 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     }
 
     public void OnBarcodeResult(BarcodeModel barcodeModel) {
-        if (barcodeModel.items() != null) {
-            if (barcodeModel.items().size() > 0) {
-                String result = String.format("Title: %s\nBrand: %s\nAsin: %s", barcodeModel.items().get(0).title(), barcodeModel.items().get(0).brand(), barcodeModel.items().get(0).asin());
-                if (barcodeModel.items().get(0).images().size() > 0) {
-                    String imageUrl = barcodeModel.items().get(0).images().get(0);
-                    Timber.d(String.format("Image Url %s", imageUrl));
-                    LoadProductImage(imageUrl);
-                }
-                getMvpView().setResultText(result);
-            } else {
-                getMvpView().setResultText("No results");
+        if (barcodeModel.items().size() > 0) {
+            String result = String.format("Title: %s\nBrand: %s\nAsin: %s", barcodeModel.items().get(0).title(), barcodeModel.items().get(0).brand(), barcodeModel.items().get(0).asin());
+            if (barcodeModel.items().get(0).images().size() > 0) {
+                String imageUrl = barcodeModel.items().get(0).images().get(0);
+                Timber.d(String.format("Image Url %s", imageUrl));
+                LoadProductImage(imageUrl);
             }
+            getMvpView().setResultText(result);
+        } else {
+            getMvpView().setResultText(mContext.getString(R.string.error_empty_product_info));
         }
     }
 

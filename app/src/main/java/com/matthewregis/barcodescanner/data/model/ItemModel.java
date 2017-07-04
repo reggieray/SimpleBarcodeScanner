@@ -65,4 +65,37 @@ public abstract class ItemModel {
     @Nullable
     @SerializedName("images")
     public abstract List<String> images();
+
+    public static Builder builder() {
+        return new AutoValue_ItemModel.Builder();
+    }
+
+    @AutoValue.Builder
+    public abstract static class Builder {
+        public abstract Builder ean(String ean);
+
+        public abstract Builder title(String title);
+
+        public abstract Builder upc(String upc);
+
+        public abstract Builder gtin(String gtin);
+
+        public abstract Builder asin(String asin);
+
+        public abstract Builder description(String description);
+
+        public abstract Builder brand(String brand);
+
+        public abstract Builder model(String model);
+
+        public abstract Builder dimension(String dimension);
+
+        public abstract Builder weight(String weight);
+
+        public abstract Builder currency(String currency);
+
+        public abstract Builder images(List<String> images);
+
+        public abstract ItemModel build();
+    }
 }

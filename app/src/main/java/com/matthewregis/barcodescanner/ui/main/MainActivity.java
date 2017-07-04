@@ -139,7 +139,7 @@ public class MainActivity extends BaseActivity implements MainMvpView, View.OnCl
 
     @Override
     public void showBarcodeInput() {
-        DialogFactory.createCustomMaterialDialogInput(this, "Barcode input", "Please input a UPC, ISBN or EAN number", "eg. 6867441000198", "", "Ok", new MaterialDialog.InputCallback() {
+        DialogFactory.createCustomMaterialDialogInput(this, getString(R.string.barcode_input_tiltle), getString(R.string.barcode_input_message), getString(R.string.barcode_input_hint), "", getString(R.string.Ok), new MaterialDialog.InputCallback() {
             @Override
             public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
                 //could capture and validate on key press

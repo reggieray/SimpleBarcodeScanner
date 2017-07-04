@@ -3,4 +3,11 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="pref_seen_helper_text">pref_seen_helper_text</string>
     <string name="helper_text">Lookup product info by either scanning or inputting a barcode via buttons to the bottom right.</string>
+    <string name="error_barcode_invalid">Sorry that barcode doesn\'t look valid UPC, ISBN or EAN barcode.</string>
+    <string name="error_api_failed">Error on fetching info</string>
+    <string name="error_empty_product_info">Product info empty</string>
+    <string name="barcode_input_tiltle">Barcode input</string>
+    <string name="barcode_input_message">Please input a UPC, ISBN or EAN number</string>
+    <string name="barcode_input_hint">eg. 6867441000198</string>
+    <string name="Ok">Ok</string>
 </resources>
