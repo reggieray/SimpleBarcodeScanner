@@ -18,6 +18,8 @@ Libraries and tools included:
 # Acknowledgments
 * [Barcode Api](http://www.upcitemdb.com/) - Used as the api to get questions.
 
+# Demo
+Watch a demo video below 
 [![Demo](https://img.youtube.com/vi/n3BYpZAVcig/0.jpg)](https://www.youtube.com/watch?v=n3BYpZAVcig)
 
 # License
