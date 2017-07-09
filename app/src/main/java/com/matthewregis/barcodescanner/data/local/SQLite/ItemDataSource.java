@@ -13,7 +13,7 @@ import rx.Observable;
 
 public interface ItemDataSource {
 
-    Observable<Item> getItem();
+    Observable<Item> getItemById(Integer Id);
 
     Observable<List<Item>> getItems();
 

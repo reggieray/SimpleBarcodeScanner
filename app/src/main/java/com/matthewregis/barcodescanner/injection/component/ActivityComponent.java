@@ -13,7 +13,7 @@ import dagger.Subcomponent;
 @PerActivity
 @Subcomponent(modules = ActivityModule.class)
 public interface ActivityComponent {
-    //example
+
     void inject(MainActivity mainActivity);
 
 }

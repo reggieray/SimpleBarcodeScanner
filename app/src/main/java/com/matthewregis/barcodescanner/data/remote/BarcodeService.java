@@ -1,7 +1,4 @@
 package com.matthewregis.barcodescanner.data.remote;
-
-import android.content.Context;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.matthewregis.barcodescanner.data.model.BarcodeModel;
@@ -35,9 +32,9 @@ public interface BarcodeService {
      *******/
     class Creator {
 
-        public static BarcodeService newBarcodeService(Context context) {
+        public static BarcodeService newBarcodeService() {
 
-            String ENDPOINT = " https://api.upcitemdb.com";
+            String ENDPOINT = "https://api.upcitemdb.com";
 
             Gson gson = new GsonBuilder()
                     .registerTypeAdapterFactory(MyGsonTypeAdapterFactory.create())

@@ -16,8 +16,8 @@ public interface ItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertItem(Item item);
 
-    @Query("SELECT * FROM Items LIMIT 1")
-    Item getItem();
+    @Query("SELECT * FROM Items WHERE item_id = :Id LIMIT 1")
+    Item getItemById(int Id);
 
     @Query("SELECT * FROM Items ORDER BY item_id DESC")
     List<Item> getItems();

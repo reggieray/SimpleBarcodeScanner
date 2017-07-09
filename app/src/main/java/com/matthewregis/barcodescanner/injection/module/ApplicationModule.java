@@ -52,7 +52,7 @@ public class ApplicationModule {
     @Provides
     @Singleton
     BarcodeService providesPPSService() {
-        return BarcodeService.Creator.newBarcodeService(mApplication.getApplicationContext());
+        return BarcodeService.Creator.newBarcodeService();
     }
 
 }

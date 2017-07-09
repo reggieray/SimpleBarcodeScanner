@@ -112,7 +112,6 @@ public class MainActivity extends BaseActivity implements MainMvpView, View.OnCl
                 final int position = viewHolder.getAdapterPosition();
                 ItemViewModel item = mAdapter.getItemAtPos(position);
                 mPresenter.RemoveItem(item);
-
             }
         });
         itemTouchHelper.attachToRecyclerView(productList);
@@ -252,6 +251,7 @@ public class MainActivity extends BaseActivity implements MainMvpView, View.OnCl
     @Override
     public void removeItem(ItemViewModel item) {
         mAdapter.removeItem(item);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

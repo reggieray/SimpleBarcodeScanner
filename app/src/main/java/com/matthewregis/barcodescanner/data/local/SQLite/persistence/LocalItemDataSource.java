@@ -20,13 +20,13 @@ public class LocalItemDataSource implements ItemDataSource {
     }
 
     @Override
-    public Observable<Item> getItem() {
+    public Observable<Item> getItemById(final Integer Id) {
         return Observable.create(new Observable.OnSubscribe<Item>() {
 
             @Override
             public void call(Subscriber<? super Item> subscriber) {
                 if (subscriber.isUnsubscribed()) return;
-                subscriber.onNext(mItemDao.getItem());
+                subscriber.onNext(mItemDao.getItemById(Id));
                 subscriber.onCompleted();
             }
         });
