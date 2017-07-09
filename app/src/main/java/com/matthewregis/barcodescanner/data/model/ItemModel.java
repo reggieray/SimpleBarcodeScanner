@@ -1,5 +1,6 @@
 package com.matthewregis.barcodescanner.data.model;
 
+import android.os.Parcelable;
 import android.support.annotation.*;
 
 import com.google.auto.value.*;
@@ -13,10 +14,14 @@ import java.util.List;
  */
 
 @AutoValue
-public abstract class ItemModel {
+public abstract class ItemModel implements Parcelable{
     public static TypeAdapter<ItemModel> typeAdapter(Gson gson) {
         return new AutoValue_ItemModel.GsonTypeAdapter(gson);
     }
+
+    public ItemModel() {
+    }
+
 
     @Nullable
     @SerializedName("ean")
@@ -72,6 +77,7 @@ public abstract class ItemModel {
 
     @AutoValue.Builder
     public abstract static class Builder {
+
         public abstract Builder ean(String ean);
 
         public abstract Builder title(String title);

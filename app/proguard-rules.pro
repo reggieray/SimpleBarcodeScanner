@@ -71,6 +71,9 @@
 -keepclassmembers com.matthewregis.barcodescanner.data.model.** {
     !static !private <fields>;
 }
+-keepclassmembers com.matthewregis.barcodescanner.data.viewmodel.** {
+    !static !private <fields>;
+}
 # Produces useful obfuscated stack traces
 # http://proguard.sourceforge.net/manual/examples.html#stacktrace
 -renamesourcefileattribute SourceFile

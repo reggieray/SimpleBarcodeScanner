@@ -8,34 +8,35 @@
     tools:context="com.matthewregis.barcodescanner.ui.main.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
-
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/md_transparent"
-            android:visibility="gone" />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/result"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/image"
-            android:layout_margin="10dp"
-            android:textAlignment="center" />
-
-    </RelativeLayout>
-
     <ProgressBar
         android:id="@+id/progess_bar"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:visibility="gone" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/product_list_swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/progess_bar">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/product_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/empty_list_text"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:visibility="gone" />
+        android:text="@string/empty_items_list"
+        android:textAlignment="center"
+        android:visibility="visible" />
 
 </RelativeLayout>

@@ -4,21 +4,26 @@ import android.content.Context;
 
 import com.matthewregis.barcodescanner.data.DataManager;
 import com.matthewregis.barcodescanner.data.local.PrefHelper;
-import com.matthewregis.barcodescanner.data.model.BarcodeModel;
-import com.matthewregis.barcodescanner.data.model.ItemModel;
+import com.matthewregis.barcodescanner.data.local.SQLite.ItemDataSource;
+import com.matthewregis.barcodescanner.data.local.SQLite.persistence.Item;
+import com.matthewregis.barcodescanner.data.viewmodel.ItemViewModel;
 import com.matthewregis.barcodescanner.ui.main.MainMvpView;
 import com.matthewregis.barcodescanner.ui.main.MainPresenter;
+import com.matthewregis.barcodescanner.util.RxSchedulersOverrideRule;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
+import rx.Observable;
+
+import static org.mockito.ArgumentMatchers.anyListOf;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -37,17 +42,22 @@ public class MainPresenterTests {
     @Mock
     PrefHelper mPrefHelper;
     @Mock
+    ItemDataSource mItemDataSource;
+    @Mock
     BarcodeScannerApplication mApplication;
     @Mock
     Context mContext;
     private MainPresenter mPresenter;
 
+    @Rule
+    public final RxSchedulersOverrideRule mOverrideSchedulersRule = new RxSchedulersOverrideRule();
 
     @Before
     public void setUp() {
         mPresenter = new MainPresenter(mContext, mMockDataManager);
         mPresenter.attachView(mMainMvpView);
         when(mMockDataManager.getPrefHelper()).thenReturn(mPrefHelper);
+        when(mMockDataManager.getItemDataSource()).thenReturn(mItemDataSource);
     }
 
     @After
@@ -66,17 +76,7 @@ public class MainPresenterTests {
         String error = "Sorry that barcode doesn't look valid UPC, ISBN or EAN barcode.";
         when(mContext.getString(R.string.error_barcode_invalid)).thenReturn(error);
         mPresenter.OnInputOfBarcode("2324234");
-        verify(mMainMvpView, times(1)).hideImage();
-        verify(mMainMvpView, times(1)).setResultText("");
         verify(mMainMvpView, times(1)).showError(error);
-    }
-
-    @Test
-    public void ShouldShowProductImage() throws Exception {
-        String imgUrl = "https://madeupurl.com/img.jpg";
-        mPresenter.LoadProductImage(imgUrl);
-        verify(mMainMvpView, times(1)).setProductImage(imgUrl);
-        verify(mMainMvpView, times(1)).showImage();
     }
 
     @Test
@@ -100,50 +100,55 @@ public class MainPresenterTests {
     }
 
     @Test
-    public void ShouldShowEmptyErrorMessageOnEmptyModel() throws Exception {
-        String error = "Sorry that barcode doesn't look valid UPC, ISBN or EAN barcode.";
-        when(mContext.getString(R.string.error_empty_product_info)).thenReturn(error);
-        List<ItemModel> itemModelList = new ArrayList<>();
-        BarcodeModel barcodeModel = BarcodeModel.builder().code("").total(100).items(itemModelList).build();
-        mPresenter.OnBarcodeResult(barcodeModel);
-        verify(mMainMvpView, times(1)).setResultText(error);
+    public void ShouldRemoveItemOnItemRemoved() throws Exception {
+        ItemViewModel itemViewModel = ItemViewModel.builder().id(1).build();
+        mPresenter.OnItemRemoved(itemViewModel);
+        verify(mMainMvpView, times(1)).removeItem(itemViewModel);
     }
 
     @Test
-    public void ShouldShowProductInfo() throws Exception {
-        List<String> images = new ArrayList<>();
-        images.add("ImageUrl");
-        ItemModel itemModel = ItemModel.builder().title("title").brand("Google").asin("12345678").images(images).build();
-        List<ItemModel> itemModelList = new ArrayList<>();
-        itemModelList.add(itemModel);
-        BarcodeModel barcodeModel = BarcodeModel.builder().code("").total(100).items(itemModelList).build();
-        String info = String.format("Title: %s\nBrand: %s\nAsin: %s", barcodeModel.items().get(0).title(), barcodeModel.items().get(0).brand(), barcodeModel.items().get(0).asin());
-
-        mPresenter.OnBarcodeResult(barcodeModel);
-        verify(mMainMvpView, times(1)).setResultText(info);
-        verify(mMainMvpView, times(1)).setProductImage("ImageUrl");
-        verify(mMainMvpView, times(1)).showImage();
+    public void ShouldShowEmptyListText() throws Exception {
+        mPresenter.OnItemListEmpty();
+        verify(mMainMvpView, times(1)).showEmptyListText();
     }
 
     @Test
-    public void ShouldShowProductInfoNoImage() throws Exception {
-        List<String> images = new ArrayList<>();
-        ItemModel itemModel = ItemModel.builder().title("title").brand("Google").asin("12345678").images(images).build();
-        List<ItemModel> itemModelList = new ArrayList<>();
-        itemModelList.add(itemModel);
-        BarcodeModel barcodeModel = BarcodeModel.builder().code("").total(100).items(itemModelList).build();
-        String info = String.format("Title: %s\nBrand: %s\nAsin: %s", barcodeModel.items().get(0).title(), barcodeModel.items().get(0).brand(), barcodeModel.items().get(0).asin());
-
-        mPresenter.OnBarcodeResult(barcodeModel);
-        verify(mMainMvpView, times(1)).setResultText(info);
-        verify(mMainMvpView, never()).setProductImage("ImageUrl");
-        verify(mMainMvpView, never()).showImage();
+    public void ShouldHideEmptyListText() throws Exception {
+        mPresenter.OnItemListPopulated();
+        verify(mMainMvpView, times(1)).hideEmptyListText();
     }
 
+    @Test
+    public void ShouldShowConfirmDeleteAllDialog() throws Exception {
+        mPresenter.OnMenuDeleteAllSelected();
+        verify(mMainMvpView, times(1)).showConfirmDeleteAllDialog();
+    }
 
+    @Test
+    public void ShouldLoadItems() throws Exception {
+        when(mItemDataSource.getItems())
+                .thenReturn(Observable.just(Collections.<Item>emptyList()));
+        mPresenter.LoadItems();
+        verify(mMainMvpView, times(1)).setItemList(anyListOf(ItemViewModel.class));
+        verify(mMainMvpView, times(1)).setSwipeRefreshing(false);
+    }
 
+    @Test
+    public void ShouldRemoveItem() throws Exception {
+        ItemViewModel itemViewModel = ItemViewModel.builder().id(1).build();
+        when(mItemDataSource.deleteItemById(itemViewModel.id()))
+                .thenReturn(Observable.just(itemViewModel.id()));
+        mPresenter.RemoveItem(itemViewModel);
+        verify(mMainMvpView, times(1)).removeItem(itemViewModel);
+    }
 
-
+    @Test
+    public void ShouldRemoveAllItems() throws Exception {
+        when(mItemDataSource.deleteAllItems())
+                .thenReturn(Observable.just(true));
+        mPresenter.OnDeleteAllConfirmed();
+        verify(mMainMvpView, times(1)).setItemList(Collections.<ItemViewModel>emptyList());
+    }
 
 
 }

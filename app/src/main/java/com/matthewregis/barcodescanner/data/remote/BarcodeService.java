@@ -8,6 +8,7 @@ import com.matthewregis.barcodescanner.data.model.BarcodeModel;
 import com.matthewregis.barcodescanner.util.MyGsonTypeAdapterFactory;
 
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;

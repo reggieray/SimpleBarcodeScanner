@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.matthewregis.barcodescanner.data.DataManager;
 import com.matthewregis.barcodescanner.data.local.PrefHelper;
+import com.matthewregis.barcodescanner.data.local.SQLite.ItemDataSource;
 import com.matthewregis.barcodescanner.data.remote.BarcodeService;
 import com.matthewregis.barcodescanner.injection.ApplicationContext;
 import com.matthewregis.barcodescanner.injection.module.ApplicationModule;
@@ -22,6 +23,7 @@ public interface ApplicationComponent {
     Application application();
     BarcodeService BarcodeService();
     PrefHelper prefHeler();
+    ItemDataSource itemDataSource();
     DataManager dataManager();
 
 }

@@ -9,5 +9,9 @@
     <string name="barcode_input_tiltle">Barcode input</string>
     <string name="barcode_input_message">Please input a UPC, ISBN or EAN number</string>
     <string name="barcode_input_hint">eg. 6867441000198</string>
-    <string name="Ok">Ok</string>
+    <string name="Ok">OK</string>
+    <string name="Cancel">CANCEL</string>
+    <string name="empty_items_list">Empty Items List :(</string>
+    <string name="menu_delete_all">Delete All</string>
+    <string name="confirm_delete_all_items">Are you sure you want to delete all items?</string>
 </resources>

@@ -32,7 +32,7 @@ public class PrefHelper {
     public void setHasSeenHelperText(Boolean value) {
         SharedPreferences.Editor e = mPref.edit();
         e.putBoolean(mContext.getString(R.string.pref_seen_helper_text), value);
-        e.commit();
+        e.apply();
     }
 
     public Boolean hasSeenHelperText() {

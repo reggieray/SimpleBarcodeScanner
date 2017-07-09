@@ -1,7 +1,6 @@
 package com.matthewregis.barcodescanner;
 
 import com.matthewregis.barcodescanner.util.BarcodeValidationUtil;
-import com.matthewregis.barcodescanner.util.StringUtil;
 
 import org.junit.Before;
 import org.junit.Test;
