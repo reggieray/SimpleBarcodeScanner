@@ -16,7 +16,7 @@ Libraries and tools included:
 
 
 # Acknowledgments
-* [Barcode Api](http://www.upcitemdb.com/) - Used as the api to get questions.
+* [Barcode Api](http://www.upcitemdb.com/) - Used as the api to get product info.
 
 # Demo Video
 Watch a demo video below
