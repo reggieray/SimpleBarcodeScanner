@@ -23,7 +23,7 @@ Libraries and tools included:
 * [Barcode Api](http://www.upcitemdb.com/) - Used as the api to get product info.
 
 # Demo Video
-Watch a demo video below (old)
+Watch a demo video below
 
 [![Demo](https://img.youtube.com/vi/RujHKpBKIB4/0.jpg)](https://www.youtube.com/watch?v=RujHKpBKIB4)
 
