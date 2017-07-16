@@ -4,6 +4,7 @@ import com.matthewregis.barcodescanner.data.local.persistence.Item;
 
 /**
  * Created by matthew on 15/07/2017.
+ * Helper to build item info string
  */
 
 public final class ItemInfoHelper {

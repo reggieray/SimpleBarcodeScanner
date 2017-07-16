@@ -1,20 +1,13 @@
 package com.matthewregis.barcodescanner;
-
-import android.content.Context;
-
 import com.matthewregis.barcodescanner.data.DataManager;
 import com.matthewregis.barcodescanner.data.local.ItemDataSource;
 import com.matthewregis.barcodescanner.data.local.PrefHelper;
 import com.matthewregis.barcodescanner.data.local.persistence.Item;
-import com.matthewregis.barcodescanner.data.viewmodel.ItemViewModel;
 import com.matthewregis.barcodescanner.ui.item_info.ItemInfoMvpView;
 import com.matthewregis.barcodescanner.ui.item_info.ItemInfoPresenter;
-import com.matthewregis.barcodescanner.ui.main.MainMvpView;
-import com.matthewregis.barcodescanner.ui.main.MainPresenter;
 import com.matthewregis.barcodescanner.util.ItemInfoHelper;
 import com.matthewregis.barcodescanner.util.RxSchedulersOverrideRule;
 
-import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -23,12 +16,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Collections;
 
 import rx.Observable;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyListOf;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -36,6 +27,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * Created by matthew on 04/07/2017.
+ * Item Info Presenter Tests
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ItemInfoPresenterTests {

@@ -10,6 +10,7 @@ import timber.log.Timber;
 
 /**
  * Created by reg on 08/02/2017.
+ * Logs requests made over http/https
  */
 
 

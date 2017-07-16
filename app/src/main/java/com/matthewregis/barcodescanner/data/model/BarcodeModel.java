@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by matthew on 03/07/2017.
+ * Model for http://www.upcitemdb.com api
  */
 @AutoValue
 public abstract class BarcodeModel implements Parcelable {

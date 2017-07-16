@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Created by matthew on 03/07/2017.
+ * Represents the model for a item for the www.upcitemdb.com api
  */
 
 @AutoValue

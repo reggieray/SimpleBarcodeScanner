@@ -31,6 +31,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * Created by matthew on 04/07/2017.
+ * Main Presenter tests
  */
 @RunWith(MockitoJUnitRunner.class)
 public class MainPresenterTests {

@@ -12,6 +12,7 @@ import timber.log.Timber;
 
 /**
  * Created by matthew on 03/07/2017.
+ * Application
  */
 
 public class BarcodeScannerApplication  extends Application {

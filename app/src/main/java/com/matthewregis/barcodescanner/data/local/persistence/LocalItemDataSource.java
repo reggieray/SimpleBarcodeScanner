@@ -9,6 +9,7 @@ import rx.Subscriber;
 
 /**
  * Created by matthew on 07/07/2017.
+ * Implementation for ItemDataSource for interacting with db
  */
 
 public class LocalItemDataSource implements ItemDataSource {

@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by matthew on 07/07/2017.
+ * Represents the data access object for item
  */
 @Dao
 public interface ItemDao {

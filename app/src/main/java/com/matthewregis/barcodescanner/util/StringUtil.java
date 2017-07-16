@@ -2,6 +2,7 @@ package com.matthewregis.barcodescanner.util;
 
 /**
  * Created by matthew on 04/07/2017.
+ * String utilities
  */
 
 public final class StringUtil {

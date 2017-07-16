@@ -18,6 +18,7 @@ import rx.Observable;
 
 /**
  * Created by reg on 17/01/2017.
+ * Service for http://www.upcitemdb.com api
  */
 
 public interface BarcodeService {

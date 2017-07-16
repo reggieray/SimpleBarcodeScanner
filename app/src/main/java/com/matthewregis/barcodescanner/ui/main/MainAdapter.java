@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by matthew on 07/07/2017.
+ * Adaptor for item recyclerview
  */
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {

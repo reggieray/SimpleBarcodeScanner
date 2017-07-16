@@ -6,6 +6,7 @@ import static com.matthewregis.barcodescanner.util.StringUtil.containsOnlyNumber
 
 /**
  * Created by matthew on 04/07/2017.
+ * Does checks against barcode
  */
 
 public final class BarcodeValidationUtil {

@@ -7,6 +7,7 @@ import android.content.Context;
 
 /**
  * Created by matthew on 07/07/2017.
+ * SQLite Database for items
  */
 @Database(entities = {Item.class}, version = 1)
 public abstract class ItemsDatabase extends RoomDatabase {

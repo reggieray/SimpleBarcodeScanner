@@ -8,6 +8,7 @@ import rx.Observable;
 
 /**
  * Created by matthew on 07/07/2017.
+ * Interface for item table
  */
 
 public interface ItemDataSource {

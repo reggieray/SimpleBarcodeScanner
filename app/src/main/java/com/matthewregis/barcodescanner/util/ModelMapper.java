@@ -8,6 +8,7 @@ import java.util.Date;
 
 /**
  * Created by matthew on 08/07/2017.
+ * Mapper for models
  */
 
 public final class ModelMapper {

@@ -1,10 +1,6 @@
 package com.matthewregis.barcodescanner.ui.item_info;
-
-import android.content.Context;
-
 import com.matthewregis.barcodescanner.data.DataManager;
 import com.matthewregis.barcodescanner.data.local.persistence.Item;
-import com.matthewregis.barcodescanner.injection.ApplicationContext;
 import com.matthewregis.barcodescanner.injection.ConfigPersistent;
 import com.matthewregis.barcodescanner.ui.base.BasePresenter;
 import com.matthewregis.barcodescanner.util.ItemInfoHelper;
@@ -19,6 +15,7 @@ import timber.log.Timber;
 
 /**
  * Created by matthew on 10/07/2017.
+ * Presenter for item info ui screen
  */
 @ConfigPersistent
 public class ItemInfoPresenter extends BasePresenter<ItemInfoMvpView> {

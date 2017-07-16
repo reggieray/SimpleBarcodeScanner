@@ -6,6 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 /**
  * Created by matthew on 07/07/2017.
+ * Represents a table in SQLite
  */
 @Entity(tableName = "items")
 public class Item {

@@ -11,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Created by matthew on 04/07/2017.
+ * Barcode Validation Util tests
  */
 @RunWith(MockitoJUnitRunner.class)
 public class BarcodeValidationUtilTests {

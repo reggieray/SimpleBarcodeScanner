@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by matthew on 08/07/2017.
+ * Item model for views
  */
 @AutoValue
 public abstract class ItemViewModel implements Parcelable {
