@@ -20,7 +20,7 @@ Libraries and tools included:
 * [Mockito](http://site.mockito.org/)
 
 # Acknowledgments
-* [Barcode Api](http://www.upcitemdb.com/) - Used as the api to get questions.
+* [Barcode Api](http://www.upcitemdb.com/) - Used as the api to get product info.
 
 # Demo Video
 Watch a demo video below (old)
