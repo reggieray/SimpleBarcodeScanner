@@ -1,6 +1,6 @@
-package com.matthewregis.barcodescanner.data.local.SQLite.persistence;
+package com.matthewregis.barcodescanner.data.local.persistence;
 
-import com.matthewregis.barcodescanner.data.local.SQLite.ItemDataSource;
+import com.matthewregis.barcodescanner.data.local.ItemDataSource;
 
 import java.util.List;
 
@@ -50,7 +50,8 @@ public class LocalItemDataSource implements ItemDataSource {
             @Override
             public void call(Subscriber<? super Item> subscriber) {
                 if (subscriber.isUnsubscribed()) return;
-                mItemDao.insertItem(item);
+                long id = mItemDao.insertItem(item);
+                item.ItemId = (int) id;
                 subscriber.onNext(item);
                 subscriber.onCompleted();
             }

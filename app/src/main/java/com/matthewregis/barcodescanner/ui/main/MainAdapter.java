@@ -84,7 +84,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         holder.brand.setText(item.brand());
         holder.asin.setText(item.asin());
         holder.date.setText(item.datetime());
-        holder.image.setImageResource(R.drawable.ic_image);
+        holder.image.setImageResource(R.drawable.no_image_available);
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onItemClick(item);
+            }
+        });
         if (item.imageurl().isEmpty()) {
             return;
         }
@@ -92,7 +98,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         Glide.with(mContext)
                 .load(item.imageurl())
                 .fitCenter()
-                .placeholder(R.drawable.ic_image)
+                .placeholder(R.drawable.no_image_available)
                 .into(holder.image);
     }
 

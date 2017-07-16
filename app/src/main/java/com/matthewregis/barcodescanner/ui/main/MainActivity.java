@@ -23,6 +23,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.matthewregis.barcodescanner.R;
 import com.matthewregis.barcodescanner.data.viewmodel.ItemViewModel;
 import com.matthewregis.barcodescanner.ui.base.BaseActivity;
+import com.matthewregis.barcodescanner.ui.item_info.ItemInfoActivity;
 import com.matthewregis.barcodescanner.util.DialogFactory;
 
 import java.util.List;
@@ -97,6 +98,11 @@ public class MainActivity extends BaseActivity implements MainMvpView, View.OnCl
             @Override
             public void onItemListPopulated() {
                 mPresenter.OnItemListPopulated();
+            }
+
+            @Override
+            public void onItemClick(ItemViewModel viewModel) {
+                mPresenter.OnItemClick(viewModel);
             }
         });
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP) {
@@ -280,5 +286,10 @@ public class MainActivity extends BaseActivity implements MainMvpView, View.OnCl
                 dialog.dismiss();
             }
         }).show();
+    }
+
+    @Override
+    public void navigateToItemInfo() {
+        startActivity(new Intent(this, ItemInfoActivity.class));
     }
 }

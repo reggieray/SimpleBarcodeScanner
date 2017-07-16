@@ -34,4 +34,6 @@ public interface MainMvpView extends MvpView {
     void hideEmptyListText();
 
     void showConfirmDeleteAllDialog();
+
+    void navigateToItemInfo();
 }

@@ -1,4 +1,4 @@
-package com.matthewregis.barcodescanner.data.local.SQLite.persistence;
+package com.matthewregis.barcodescanner.data.local.persistence;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
@@ -14,7 +14,7 @@ import java.util.List;
 public interface ItemDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertItem(Item item);
+    long insertItem(Item item);
 
     @Query("SELECT * FROM Items WHERE item_id = :Id LIMIT 1")
     Item getItemById(int Id);

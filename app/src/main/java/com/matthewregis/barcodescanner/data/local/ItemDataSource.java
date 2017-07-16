@@ -1,6 +1,5 @@
-package com.matthewregis.barcodescanner.data.local.SQLite;
-
-import com.matthewregis.barcodescanner.data.local.SQLite.persistence.Item;
+package com.matthewregis.barcodescanner.data.local;
+import com.matthewregis.barcodescanner.data.local.persistence.Item;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.matthewregis.barcodescanner.data;
 
 import com.matthewregis.barcodescanner.data.local.PrefHelper;
-import com.matthewregis.barcodescanner.data.local.SQLite.ItemDataSource;
+import com.matthewregis.barcodescanner.data.local.ItemDataSource;
 import com.matthewregis.barcodescanner.data.remote.BarcodeService;
 
 import javax.inject.Inject;

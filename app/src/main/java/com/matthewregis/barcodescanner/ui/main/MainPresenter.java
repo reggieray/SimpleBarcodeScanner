@@ -9,7 +9,7 @@ import android.content.Context;
 
 import com.matthewregis.barcodescanner.R;
 import com.matthewregis.barcodescanner.data.DataManager;
-import com.matthewregis.barcodescanner.data.local.SQLite.persistence.Item;
+import com.matthewregis.barcodescanner.data.local.persistence.Item;
 import com.matthewregis.barcodescanner.data.model.BarcodeModel;
 import com.matthewregis.barcodescanner.data.viewmodel.ItemViewModel;
 import com.matthewregis.barcodescanner.ui.base.BasePresenter;
@@ -91,7 +91,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
         String imgUrl = barcodeModel.items().get(0).images().isEmpty() ? "" : barcodeModel.items().get(0).images().get(0);
         long timeMillis = System.currentTimeMillis();
         Timber.i("currentTimeMillis: %s", String.valueOf(timeMillis));
-        Item item = new Item(barcodeModel.items().get(0).title(), barcodeModel.items().get(0).brand(), barcodeModel.items().get(0).asin(), imgUrl, String.valueOf(timeMillis));
+        Item item = new Item(barcodeModel.items().get(0).title(), barcodeModel.items().get(0).brand(), barcodeModel.items().get(0).asin(), imgUrl, String.valueOf(timeMillis), barcodeModel.items().get(0).upc(), barcodeModel.items().get(0).description());
         mSubscriptions.add(mDataManager.getItemDataSource()
                 .insertOrUpdateItem(item)
                 .subscribeOn(Schedulers.io())
@@ -198,6 +198,11 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
 
     public void OnItemListPopulated() {
         getMvpView().hideEmptyListText();
+    }
+
+    public void OnItemClick(ItemViewModel viewModel) {
+        mDataManager.getPrefHelper().setCurrentItemId(viewModel.id());
+        getMvpView().navigateToItemInfo();
     }
 
     public void OnMenuDeleteAllSelected() {

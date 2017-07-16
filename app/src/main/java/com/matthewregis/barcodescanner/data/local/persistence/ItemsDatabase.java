@@ -1,4 +1,4 @@
-package com.matthewregis.barcodescanner.data.local.SQLite.persistence;
+package com.matthewregis.barcodescanner.data.local.persistence;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;

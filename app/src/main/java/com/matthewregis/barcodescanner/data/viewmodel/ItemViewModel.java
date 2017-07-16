@@ -39,6 +39,10 @@ public abstract class ItemViewModel implements Parcelable {
     @SerializedName("datetime")
     public abstract String datetime();
 
+    @Nullable
+    @SerializedName("upc")
+    public abstract String upc();
+
     public static Builder builder() {
         return new AutoValue_ItemViewModel.Builder();
     }
@@ -58,6 +62,8 @@ public abstract class ItemViewModel implements Parcelable {
         public abstract Builder brand(String brand);
 
         public abstract Builder datetime(String datetime);
+
+        public abstract Builder upc(String upc);
 
         public abstract ItemViewModel build();
     }

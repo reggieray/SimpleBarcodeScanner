@@ -1,4 +1,4 @@
-package com.matthewregis.barcodescanner.data.local.SQLite.persistence;
+package com.matthewregis.barcodescanner.data.local.persistence;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -14,12 +14,14 @@ public class Item {
     public Item() {
     }
 
-    public Item(String title, String brand, String asin, String imageUrl, String dateTimeMillis) {
+    public Item(String title, String brand, String asin, String imageUrl, String dateTimeMillis, String upc, String description) {
         Title = title;
         Brand = brand;
         Asin = asin;
         ImageUrl = imageUrl;
         DateTimeMillis = dateTimeMillis;
+        Upc = upc;
+        Description = description;
     }
 
     @PrimaryKey(autoGenerate = true)
@@ -40,4 +42,10 @@ public class Item {
 
     @ColumnInfo(name = "date_time_millis")
     public String DateTimeMillis;
+
+    @ColumnInfo(name = "upc")
+    public String Upc;
+
+    @ColumnInfo(name = "description")
+    public String Description;
 }

@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.matthewregis.barcodescanner.data.DataManager;
 import com.matthewregis.barcodescanner.data.local.PrefHelper;
-import com.matthewregis.barcodescanner.data.local.SQLite.ItemDataSource;
-import com.matthewregis.barcodescanner.data.local.SQLite.persistence.Item;
+import com.matthewregis.barcodescanner.data.local.ItemDataSource;
+import com.matthewregis.barcodescanner.data.local.persistence.Item;
 import com.matthewregis.barcodescanner.data.viewmodel.ItemViewModel;
 import com.matthewregis.barcodescanner.ui.main.MainMvpView;
 import com.matthewregis.barcodescanner.ui.main.MainPresenter;

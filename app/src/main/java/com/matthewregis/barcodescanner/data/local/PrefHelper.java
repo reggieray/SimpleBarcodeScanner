@@ -39,5 +39,15 @@ public class PrefHelper {
         return mPref.getBoolean(mContext.getString(R.string.pref_seen_helper_text), false);
     }
 
+    public void setCurrentItemId(int value) {
+        SharedPreferences.Editor e = mPref.edit();
+        e.putInt(mContext.getString(R.string.pref_current_item_id), value);
+        e.commit();
+    }
+
+    public int getCurrentItemId() {
+        return mPref.getInt(mContext.getString(R.string.pref_current_item_id), 0);
+    }
+
 
 }
