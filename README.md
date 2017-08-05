@@ -2,6 +2,8 @@
 
 This is a demo app that allows a user to either scan a barcode (using the device camera), as well as to manually enter a barcode. This then saves the results to a SQLite db using the recently released at Google I/O '17 Android Architecture Component's Room Persistence Library. Results are displayed in a list using RecyclerView.
 
+This app demos the use of MVP (Model View Presenter) and MVVM (Model View ViewModel) design patterns and how they both can be used within the same app with DI (Dependency Injection).
+
 Libraries and tools included:
 
 * [Room](https://developer.android.com/topic/libraries/architecture/room.html)
