@@ -1,4 +1,4 @@
-package com.matthewregis.barcodescanner.ui.base;
+package com.matthewregis.barcodescanner.ui.base.mvp;
 
 /**
  * Every presenter in the app must either implement this interface or extend BasePresenter

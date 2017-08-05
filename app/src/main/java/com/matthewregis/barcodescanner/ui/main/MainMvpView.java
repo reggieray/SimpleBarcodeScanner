@@ -1,7 +1,7 @@
 package com.matthewregis.barcodescanner.ui.main;
 
 import com.matthewregis.barcodescanner.data.viewmodel.ItemViewModel;
-import com.matthewregis.barcodescanner.ui.base.MvpView;
+import com.matthewregis.barcodescanner.ui.base.mvp.MvpView;
 
 import java.util.List;
 

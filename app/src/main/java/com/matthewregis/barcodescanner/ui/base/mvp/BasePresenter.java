@@ -1,4 +1,4 @@
-package com.matthewregis.barcodescanner.ui.base;
+package com.matthewregis.barcodescanner.ui.base.mvp;
 
 public class BasePresenter<T extends MvpView> implements Presenter<T> {
 

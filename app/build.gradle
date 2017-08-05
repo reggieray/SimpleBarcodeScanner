@@ -7,6 +7,9 @@ repositories {
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
         applicationId "com.matthewregis.barcodescanner"
         minSdkVersion 15

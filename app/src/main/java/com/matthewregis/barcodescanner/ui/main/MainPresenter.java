@@ -12,7 +12,7 @@ import com.matthewregis.barcodescanner.data.DataManager;
 import com.matthewregis.barcodescanner.data.local.persistence.Item;
 import com.matthewregis.barcodescanner.data.model.BarcodeModel;
 import com.matthewregis.barcodescanner.data.viewmodel.ItemViewModel;
-import com.matthewregis.barcodescanner.ui.base.BasePresenter;
+import com.matthewregis.barcodescanner.ui.base.mvp.BasePresenter;
 import com.matthewregis.barcodescanner.util.BarcodeValidationUtil;
 import com.matthewregis.barcodescanner.util.ModelMapper;
 

@@ -2,7 +2,7 @@ package com.matthewregis.barcodescanner.injection.component;
 
 import com.matthewregis.barcodescanner.injection.PerActivity;
 import com.matthewregis.barcodescanner.injection.module.ActivityModule;
-import com.matthewregis.barcodescanner.ui.item_info.ItemInfoActivity;
+import com.matthewregis.barcodescanner.ui.item_info.view.ItemInfoActivity;
 import com.matthewregis.barcodescanner.ui.main.MainActivity;
 
 import dagger.Subcomponent;

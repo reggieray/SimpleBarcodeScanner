@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.item_info.ItemInfoActivity"
+            android:name=".ui.item_info.view.ItemInfoActivity"
             android:label="@string/title_activity_item_info"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

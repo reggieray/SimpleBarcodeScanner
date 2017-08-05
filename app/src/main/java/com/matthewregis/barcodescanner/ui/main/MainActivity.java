@@ -23,7 +23,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.matthewregis.barcodescanner.R;
 import com.matthewregis.barcodescanner.data.viewmodel.ItemViewModel;
 import com.matthewregis.barcodescanner.ui.base.BaseActivity;
-import com.matthewregis.barcodescanner.ui.item_info.ItemInfoActivity;
+import com.matthewregis.barcodescanner.ui.item_info.view.ItemInfoActivity;
 import com.matthewregis.barcodescanner.util.DialogFactory;
 
 import java.util.List;
